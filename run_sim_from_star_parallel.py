@@ -347,7 +347,7 @@ def _run_one_simulation_worker(
         )
 
     cmd.extend(extra_args)
-    cmd.extend(["--mode", "multislice","--explicit-water", "--radiation-damage","--radiation-damage-where","all","--per-frame","--use-cache-atom","--no-center"])
+    cmd.extend(["--mode", "multislice","--explicit-water", "--radiation-damage","--radiation-damage-where","all","--per-frame","--use-cache-atom","--no-center","--shake-waters"])
 #    cmd.extend(["--mode", "projection","--no-center"])
    
     env = os.environ.copy()
