@@ -26,7 +26,7 @@ This generates a sampling file with a 3.0-degree interval.
 Then, run run_sim_from_star_parallel.py to perform the simulation.
 
 For example:
-`python run_sim_from_star_parallel.py cistem_simulate_torch_direct_slabs.py 5xnl.pdb c1_3deg.star run_sim_5xnl.mrcs --output-star run_sim_5xnl.star --device cuda --jobs 8 --gpu-id 0,1,2,3,4,5,6,7 --pixel-size 1.5 --box 320 --defocus-min-um 0.8 --defocus-max-um 2.0 --n-slices 50 --dose-per-frame 1.0 --number-of-frames 40 --dose 40 --keep-tmp --inverse-contrast &`
+`python run_sim_from_star_parallel.py cistem_simulate_torch_direct_slabs.py 5xnl.pdb c1_3deg.star run_sim_5xnl.mrcs --output-star run_sim_5xnl.star --device cuda --jobs 8 --gpu-id 0,1,2,3,4,5,6,7 --pixel-size 1.5 --box 320 --defocus-min-um 0.8 --defocus-max-um 2.0 --n-slices 50 --keep-tmp --inverse-contrast &`
 
 Line 350 of run_sim_from_star_parallel.py stores the default options:
 
