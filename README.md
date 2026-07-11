@@ -7,6 +7,10 @@ https://github.com/timothygrant80/cisTEM
 
 pytorch, numpy, scipy, mrcfile
 
+## Update 20260710
+
+This version fixes two major bugs. The checkerboard artifacts if using --radiation-damage. The very high amplitude near zero frequency.
+
 # Usage
 
 To begin with, you need a PDB file and a RELION STAR file containing sampling points.
