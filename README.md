@@ -7,12 +7,6 @@ https://github.com/timothygrant80/cisTEM
 
 pytorch, numpy, scipy, mrcfile
 
-## Warning
-
-The water simulation is not exactly the same as in the original version. Use with caution.
-
-Currently the radiation damage filter has bugs. It creates artifacts. I remove it from the example and defaults.
-
 # Usage
 
 To begin with, you need a PDB file and a RELION STAR file containing sampling points.
