@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 """
 Parallel wrapper for running a multislice simulation program from RELION STAR angles.
 
@@ -345,9 +344,10 @@ def _run_one_simulation_worker(
             #    "0.0",
             ]
         )
-
     cmd.extend(extra_args)
-    cmd.extend(["--mode", "multislice","--explicit-water", "--radiation-damage","--radiation-damage-where","all","--per-frame","--use-cache-atom","--no-center","--shake-waters"])
+#    cmd.extend(["--mode", "multislice","--explicit-water", "--radiation-damage","--radiation-damage-where","all","--per-frame","--use-cache-atom","--no-center"])
+    cmd.extend(["--mode", "multislice", "--use-cache-atom","--no-center","--explicit-water", "--radiation-damage","--radiation-damage-where","all","--per-frame","--shake-waters"])
+#    cmd.extend(["--mode", "multislice", "--use-cache-atom","--no-center","--explicit-water","--shake-waters","--per-frame"])
 #    cmd.extend(["--mode", "projection","--no-center"])
    
     env = os.environ.copy()
