@@ -13,7 +13,7 @@ Updated run_sim_from_star_parallel with a new version (run_sim_from_star_paralle
 
 Example usage:
 
-`python run_sim_from_star_parallel_v3.py 5xnl_modified_ver2.pdb c1_3deg.star run_sim_5xnl.mrcs --output-star run_sim_5xnl.star --device cuda --jobs 8 --gpu-ids 0,1,2,3,4,5,6,7 --defocus-min-um 0.8 --defocus-max-um 2.0 --keep-tmp -- --pixel-size 1.5 --box 320 --n-slices 50 --dose 40 --n-slices 50 --dose-per-frame 1.0 --number-of-frames 40`
+`python run_sim_from_star_parallel_v3.py 5xnl_modified_ver2.pdb c1_3deg.star run_sim_5xnl.mrcs --output-star run_sim_5xnl.star --device cuda --jobs 8 --gpu-ids 0,1,2,3,4,5,6,7 --defocus-min-um 0.8 --defocus-max-um 2.0 --keep-tmp -- --pixel-size 1.5 --box 320 --dose 40 --n-slices 50 --dose-per-frame 1.0 --number-of-frames 40`
 
 Note the double dash (--) between --keep-tmp and --pixel-size. It is required when passing additional parameters to cistem_simulate_torch_direct_slabs.py.
 
