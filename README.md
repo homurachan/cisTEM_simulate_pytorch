@@ -7,6 +7,18 @@ https://github.com/timothygrant80/cisTEM
 
 pytorch, numpy, scipy, mrcfile
 
+## Update 20260824
+
+Updated run_sim_from_star_parallel with a new version (run_sim_from_star_parallel_v2.py). This version uses persistent workers, so PyTorch does not need to be loaded every time cistem_simulate_torch_direct_slabs.py is called. You should place run_sim_from_star_parallel_v2.py and cistem_simulate_torch_direct_slabs.py in the same directory.
+
+Example usage:
+
+`python run_sim_from_star_parallel_v3.py 5xnl_modified_ver2.pdb c1_3deg.star run_sim_5xnl.mrcs --output-star run_sim_5xnl.star --device cuda --jobs 8 --gpu-ids 0,1,2,3,4,5,6,7 --defocus-min-um 0.8 --defocus-max-um 2.0 --keep-tmp -- --pixel-size 1.5 --box 320 --n-slices 50 --dose 40 --n-slices 50 --dose-per-frame 1.0 --number-of-frames 40`
+
+Note the double dash (--) between --keep-tmp and --pixel-size. It is required when passing additional parameters to cistem_simulate_torch_direct_slabs.py.
+
+On our GPU servers, where network IO causes very slow PyTorch startup, this new version still takes about 170 s to initialize. However, once initialized, each batch of images is generated about 8× faster (11 s vs. 90 s).
+
 ## Update 20260710
 
 This version fixes two major bugs. The checkerboard artifacts if using --radiation-damage. The very high amplitude near zero frequency.
