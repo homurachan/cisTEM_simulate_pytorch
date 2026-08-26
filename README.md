@@ -5,17 +5,41 @@ https://github.com/timothygrant80/cisTEM
 
 ## Required libraries
 
-pytorch, numpy, scipy, mrcfile
+pytorch, numpy, mrcfile
+
+## Update 20260825
+
+This is a major update. Here is the changelog.
+
+Add --inelastic-potential for atoms.
+
+Add --ice-thickness (in Angstrom) to cube, the old version use the box size as the Z-length of cube. If not set, the thickness is the box size.
+
+You can also change the position of protein to upper or lower surface of ice, default is the center.
+
+Fix the old version enabling --water-soft-weight produces severe edging artifacts.
+
+Fix --shake-water using voxel instead of angstrom.
+
+Fix when running in single frame mode, dose does not apply.
+
+Fix wrong equation for hydration-weight.
+
+Remove the old unused functions.
+
+Speed up by 3 times. Now it takes 4 seconds on an RTX 6000 Ada to generate a movie, comparing to the old version: 11 seconds.
+
+Add demo files to repository. Download [5xnl_modified_ver2.pdb](https://github.com/homurachan/cisTEM_simulate_pytorch/blob/main/5xnl_modified_ver2.pdb), [c1_3deg.star](https://github.com/homurachan/cisTEM_simulate_pytorch/blob/main/c1_3deg.star), [cistem_simulate_torch_direct_slabs.py](https://github.com/homurachan/cisTEM_simulate_pytorch/blob/main/cistem_simulate_torch_direct_slabs.py), and [run_sim_from_star_parallel_v2.py](https://github.com/homurachan/cisTEM_simulate_pytorch/blob/main/run_sim_from_star_parallel_v2.py). Put them into the same directory.
+
+Example usage, if you have 8 GPUs. Otherwise change --jobs to the number of your GPUs and --gpu-ids to the correct ones: 
+
+`python run_sim_from_star_parallel_v3.py 5xnl_modified_ver2.pdb c1_3deg.star run_sim_5xnl.mrcs --output-star run_sim_5xnl.star --device cuda --jobs 8 --gpu-ids 0,1,2,3,4,5,6,7 --defocus-min-um 0.8 --defocus-max-um 2.0 --keep-tmp  --  --pixel-size 1.5 --box 320 --n-slices 50 --dose 40 --dose-per-frame 1.0 --number-of-frames 40  --ice-thickness 400 --inelastic-potential  --per-frame  --shake-waters --mode multislice  --water-soft-weight --poisson &`
+
+Note the double dash (--) between --keep-tmp and --pixel-size. It is required when passing additional parameters to cistem_simulate_torch_direct_slabs.py.
 
 ## Update 20260824
 
 Updated run_sim_from_star_parallel with a new version (run_sim_from_star_parallel_v2.py). This version uses persistent workers, so PyTorch does not need to be loaded every time cistem_simulate_torch_direct_slabs.py is called. You should place run_sim_from_star_parallel_v2.py and cistem_simulate_torch_direct_slabs.py in the same directory.
-
-Example usage:
-
-`python run_sim_from_star_parallel_v3.py 5xnl_modified_ver2.pdb c1_3deg.star run_sim_5xnl.mrcs --output-star run_sim_5xnl.star --device cuda --jobs 8 --gpu-ids 0,1,2,3,4,5,6,7 --defocus-min-um 0.8 --defocus-max-um 2.0 --keep-tmp -- --pixel-size 1.5 --box 320 --dose 40 --n-slices 50 --dose-per-frame 1.0 --number-of-frames 40`
-
-Note the double dash (--) between --keep-tmp and --pixel-size. It is required when passing additional parameters to cistem_simulate_torch_direct_slabs.py.
 
 On our GPU servers, where network IO causes very slow PyTorch startup, this new version still takes about 170 s to initialize. However, once initialized, each batch of images is generated about 8× faster (11 s vs. 90 s).
 
